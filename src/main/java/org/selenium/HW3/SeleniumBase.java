@@ -22,13 +22,13 @@ public class SeleniumBase {
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='fa fa-car']")));
         driver.findElement(By.xpath("//*[@class='fa fa-car']")).click();
         driver.findElement(By.xpath("//*[@class='text-right']/a[@href='/car/create']")).click();
-        driver.findElement(By.xpath("//input[@name='CarFormCreate[carNum]']")).sendKeys("А999НА99");
+        driver.findElement(By.xpath("//input[@name='CarFormCreate[carNum]']")).sendKeys("А998НА99");
         driver.findElement(By.xpath("//span[@id='select2-carformcreate-organizationid-container']")).click();
         driver.findElement(By.xpath("//li[text() = 'GBT']")).click();
         driver.findElement(By.xpath("//button[@type='submit']")).click();
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h3[contains(.,' Базовая информация')]")));
         driver.findElement(By.xpath("//a[contains(@href, '/logout')]")).click();
         Thread.sleep(5000); //Жду просто чтобы увидеть, что разлогинился =)
-        driver.quit();
+      //  driver.quit();
     }
 }
