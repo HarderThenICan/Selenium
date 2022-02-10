@@ -1,9 +1,17 @@
 package HW6;
 
+import HW7.CustomLogger;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Allure;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+
+import java.util.Iterator;
 
 public class parkomaticaTest {
     WebDriver driver;
@@ -16,7 +24,7 @@ public class parkomaticaTest {
 
     @BeforeEach
     void initDriver() {
-        driver = new ChromeDriver();
+        driver = new EventFiringDecorator(new CustomLogger()).decorate(new ChromeDriver());
         driver.get(Parkomatica_URL);
     }
 
@@ -44,7 +52,7 @@ public class parkomaticaTest {
 
     @DisplayName("Проверка наличия авто")
     @Test
-    public void carPresentInListTest(){
+    public void carPresentInListTest() {
         new LoginPage(driver).fillLogin("gbt@gbt.ru")
                 .fillPassword("GBT")
                 .clickLoginButton()
@@ -55,6 +63,11 @@ public class parkomaticaTest {
 
     @AfterEach
     void killDriver() {
+        LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
+        Iterator<LogEntry> iterator = logEntries.iterator();
+        while (iterator.hasNext()) {
+            Allure.addAttachment("Лог браузера", iterator.next().getMessage());
+        }
         driver.quit();
     }
 

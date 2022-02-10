@@ -1,6 +1,7 @@
 package HW6;
 
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,7 @@ public class InfoPage extends BasePage {
     @FindBy(xpath = "//*[@class='fa fa-car']")
     private WebElement carListButton;
 
+    @Step("Проверка URL страницы")
     public void checkUrl() {
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='fa fa-money-bill bg-gray']")));
         String URL = driver.getCurrentUrl();
@@ -25,6 +27,7 @@ public class InfoPage extends BasePage {
 
     }
 
+    @Step("Клик на кнопку списка автомобилей")
     public CarListPage clickCarListButton() {
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='fa fa-car']")));
         carListButton.click();
