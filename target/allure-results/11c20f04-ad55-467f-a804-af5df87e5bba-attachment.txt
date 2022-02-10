@@ -1,0 +1,1 @@
+https://cabinet.parkomatica.ru/manifest.json 0 Manifest: Line: 1, column: 1, Syntax error.
